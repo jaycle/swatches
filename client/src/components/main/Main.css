@@ -1,0 +1,43 @@
+.Main {
+  flex: 1;
+  display: flex;
+}
+
+.Main nav {
+  background-color: #d6d8d8;
+  flex: 0 1 20%;
+}
+
+.Main section {
+  background-color: gold;
+  flex: 1;
+}
+
+.List {
+  margin: 0.5em;
+  text-align: left;
+}
+
+.List li {
+  list-style-type: none;
+  padding-top: 0.5em;
+  font-size: 1.3em;
+}
+
+.List a:link:hover {
+  color: #9b9b9b;
+}
+
+.List a:visited:hover {
+  color: #9b9b9b;
+}
+
+.List a:link {
+  color: var(--fg-color);
+  text-decoration: none;
+}
+
+.List a:visited {
+  color: var(--fg-color);
+  text-decoration: none;
+}
