@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
+import { Swatch } from '../../data/swatch';
+import Detail from '../detail/Detail';
+import List from '../list/List';
 import RandomButton from '../randombutton/RandomButton';
 import './Main.css';
 
-interface Swatch {
-  id: number;
-  hue: number;
-  saturation: number;
-  value: number;
-}
-
 const colorRoutes = [
-  { to: '/red', name: 'Red' },
-  { to: '/orange', name: 'Orange' },
-  { to: '/yellow', name: 'Yellow' },
-  { to: '/green', name: 'Green' },
-  { to: '/blue', name: 'Blue' },
-  { to: '/purple', name: 'Purple' },
-  { to: '/brown', name: 'Brown' },
-  { to: '/gray', name: 'Gray' },
+  { to: '/colors/red', name: 'Red' },
+  { to: '/colors/orange', name: 'Orange' },
+  { to: '/colors/yellow', name: 'Yellow' },
+  { to: '/colors/green', name: 'Green' },
+  { to: '/colors/blue', name: 'Blue' },
+  { to: '/colors/purple', name: 'Purple' },
+  { to: '/colors/brown', name: 'Brown' },
+  { to: '/colors/gray', name: 'Gray' },
 ]
 
 function Main() {
@@ -43,7 +39,15 @@ function Main() {
           </ul>
         </nav>
         <section>
-          <span>Content will go here</span>
+          <Route
+            exact
+            path="/swatches/:id"
+            render={routeProps => (<Detail swatch={data[Number.parseInt(routeProps.match.params.id)]}/>)}>
+          </Route>
+          <Route
+            path="/colors/:color"
+            render={routeProps => (<List swatches={data} filter={routeProps.match.params.color}/>)}>
+          </Route>
         </section>
       </div>
     </Router>

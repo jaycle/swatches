@@ -11,7 +11,7 @@ export default function RandomButton(props: RandomButtonProps) {
   const clicked = () => {
     const max = props.choices.length;
     const idx = Math.floor(Math.random() * max)
-    history.push(`/${props.choices[idx]}`)
+    history.push(`/swatches/${props.choices[idx]}`)
   }
 
   return (
