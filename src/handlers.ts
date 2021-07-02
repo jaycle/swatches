@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { dbConfig, Swatch } from './models';
+import { Swatch } from './db/models';
 
 interface HelloResponse {
   hello: string;

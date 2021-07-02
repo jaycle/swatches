@@ -1,6 +1,6 @@
 import express from 'express';
 import { rootHandler, colorHandler } from './handlers';
-import { dbConfig } from './models/index';
+import { dbConfig } from './db/models/index';
 
 dbConfig
   .authenticate()
