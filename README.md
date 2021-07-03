@@ -20,6 +20,5 @@ The app can be found at https://fierce-ocean-48791.herokuapp.com/.
 
 ## Remaining Work
 - Search functionality
-- Darken/lighten functionality
 - Filter colors only once (performance)
 - Responsive (mobile) view
