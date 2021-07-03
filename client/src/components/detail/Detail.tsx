@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SwatchModel } from "../../data/swatch";
 import Swatch from "../swatch/Swatch";
 import './Detail.css'
@@ -9,6 +9,9 @@ interface DetailProps {
 
 export default function Detail(props: DetailProps) {
   const [selectedSwatch, selectSwatch] = useState(props.swatch);
+  useEffect(() => {
+    selectSwatch(props.swatch);
+  }, [props]);
 
   if (!props.swatch) {
     return (
