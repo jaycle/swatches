@@ -8,8 +8,50 @@ export interface SwatchModel {
 
 export interface HSL {
   hue: number;
-  saturation: string;
-  lightness: string;
+  saturation: number; // [0 - 100]
+  lightness: number; // [1 - 100]
+}
+
+export function HSLToHex(h: number, s: number, l: number) {
+  // https://css-tricks.com/converting-color-spaces-in-javascript/
+
+  s /= 100;
+  l /= 100;
+
+  let c = (1 - Math.abs(2 * l - 1)) * s,
+      x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+      m = l - c/2,
+      r = 0,
+      g = 0,
+      b = 0;
+
+  if (0 <= h && h < 60) {
+    r = c; g = x; b = 0;
+  } else if (60 <= h && h < 120) {
+    r = x; g = c; b = 0;
+  } else if (120 <= h && h < 180) {
+    r = 0; g = c; b = x;
+  } else if (180 <= h && h < 240) {
+    r = 0; g = x; b = c;
+  } else if (240 <= h && h < 300) {
+    r = x; g = 0; b = c;
+  } else if (300 <= h && h < 360) {
+    r = c; g = 0; b = x;
+  }
+  // Having obtained RGB, convert channels to hex
+  let rStr = Math.round((r + m) * 255).toString(16);
+  let gStr = Math.round((g + m) * 255).toString(16);
+  let bStr = Math.round((b + m) * 255).toString(16);
+
+  // Prepend 0s, if necessary
+  if (rStr.length === 1)
+    rStr = "0" + rStr;
+  if (gStr.length === 1)
+    gStr = "0" + gStr;
+  if (bStr.length === 1)
+    bStr = "0" + bStr;
+
+  return "#" + rStr + gStr + bStr;
 }
 
 export const getFilterFn = (filter: string) => {
@@ -70,8 +112,8 @@ export const getHsl = (color: {hue: number, saturation: number, value: number}):
 
   return ({
     hue: color.hue,
-    saturation: `${outSat * 100}%`,
-    lightness: `${lightness * 100}%`
+    saturation: outSat * 100,
+    lightness: lightness * 100
   });
 }
 

@@ -1,4 +1,32 @@
 .Swatch {
-  height: 80px;
-  width: 280px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0px 1px 8px 4px rgb(193 193 193);
+  border-style: solid;
+  border-color: white;
+}
+
+.Swatch-Color {
+  flex: 1;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.Swatch-Label {
+  background-color: white;
+  font-size: xx-large;
+  padding-left: 0.3em;
+  text-align: left;
+  color: var(--fg-color);
+  flex: 0 1 20%;
+  display: flex;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.Swatch-Label > div {
+  align-self: center;
 }

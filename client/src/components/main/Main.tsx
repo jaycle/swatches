@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 import { SwatchModel } from '../../data/swatch';
 import Detail from '../detail/Detail';
 import List from '../list/List';
@@ -23,7 +23,6 @@ function Main() {
     fetch("/api/colors")
       .then(r => r.json())
       .then((colors: SwatchModel[]) => {
-        console.log(colors);
         const byId = colors.reduce((acc, c) => {
           acc[c.id.toString()] = c;
           return acc;
@@ -34,7 +33,7 @@ function Main() {
 
   const links = colorRoutes.map(r => <li key={r.name}><NavLink to={r.to}>{r.name}</NavLink></li>)
   return (
-    <Router>
+    <>
       <div className="Main">
         <nav>
           <RandomButton choices={Object.keys(data)}></RandomButton>
@@ -51,9 +50,14 @@ function Main() {
             path="/colors/:color"
             render={routeProps => (<List swatches={Object.values(data)} filter={routeProps.match.params.color}/>)}>
           </Route>
+          <Route
+            exact
+            path="/"
+            render={_ => (<List swatches={Object.values(data)}/>)}>
+          </Route>
         </section>
       </div>
-    </Router>
+    </>
   );
 }
 

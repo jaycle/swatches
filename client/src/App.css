@@ -6,14 +6,31 @@
 }
 
 .App-logo {
+  padding: 10px 20px;
   pointer-events: none;
+}
+
+.App-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 3em;
+}
+
+.App-search > input{
+  font-size: 1.2em;
+  height: 1.6em;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: left;
+  border-width: 0px;
 }
 
 .App-header {
   background-color: #363c3c;
   display: flex;
-  align-items: stretch;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
 }

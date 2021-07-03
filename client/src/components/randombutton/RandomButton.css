@@ -1,6 +1,7 @@
 .RandomButton {
   padding: 12px;
   width: 80%;
+  cursor: pointer;
   border-radius: 10px;
   border-color: black;
   border-style: solid;
