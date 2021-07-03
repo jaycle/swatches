@@ -2,7 +2,7 @@ import { useHistory } from 'react-router';
 import './RandomButton.css';
 
 interface RandomButtonProps {
-  choices: number[];
+  choices: string[];
 }
 
 export default function RandomButton(props: RandomButtonProps) {

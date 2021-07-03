@@ -1,15 +1,16 @@
-import { Swatch } from "../../data/swatch";
+import { SwatchModel } from "../../data/swatch";
+import Swatch from "../swatch/Swatch";
 
 interface DetailProps {
-  swatch: Swatch;
+  swatch?: SwatchModel;
 }
 
 export default function Detail(props: DetailProps) {
   return (
     <div>
-      <span>{props.swatch.id}</span>
-      <span>{props.swatch.hue}</span>
-      <span>{props.swatch.saturation}</span>
-      <span>{props.swatch.value}</span>
+      { props.swatch
+        ? <Swatch model={props.swatch}></Swatch>
+        : <div>404 - Swatch not found :(</div>
+      }
     </div>);
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
-import { Swatch } from '../../data/swatch';
+import { SwatchModel } from '../../data/swatch';
 import Detail from '../detail/Detail';
 import List from '../list/List';
 import RandomButton from '../randombutton/RandomButton';
@@ -18,35 +18,38 @@ const colorRoutes = [
 ]
 
 function Main() {
-  const [data, setData] = useState<Swatch[]>([]);
+  const [data, setData] = useState<{[key:string]: SwatchModel}>({});
   useEffect(() => {
     fetch("/api/colors")
       .then(r => r.json())
-      .then(colors => {
+      .then((colors: SwatchModel[]) => {
         console.log(colors);
-        setData(colors);
+        const byId = colors.reduce((acc, c) => {
+          acc[c.id.toString()] = c;
+          return acc;
+        }, {} as {[key: string]: SwatchModel});
+        setData(byId);
       });
   }, []);
 
-  const links = colorRoutes.map(r => <li><NavLink to={r.to}>{r.name}</NavLink></li>)
+  const links = colorRoutes.map(r => <li key={r.name}><NavLink to={r.to}>{r.name}</NavLink></li>)
   return (
     <Router>
       <div className="Main">
         <nav>
-          <RandomButton choices={data.map(d => d.id)}></RandomButton>
+          <RandomButton choices={Object.keys(data)}></RandomButton>
           <ul className="List">
             {links}
           </ul>
         </nav>
         <section>
           <Route
-            exact
             path="/swatches/:id"
-            render={routeProps => (<Detail swatch={data[Number.parseInt(routeProps.match.params.id)]}/>)}>
+            render={routeProps => <Detail swatch={data[Number.parseInt(routeProps.match.params.id)]}/>}>
           </Route>
           <Route
             path="/colors/:color"
-            render={routeProps => (<List swatches={data} filter={routeProps.match.params.color}/>)}>
+            render={routeProps => (<List swatches={Object.values(data)} filter={routeProps.match.params.color}/>)}>
           </Route>
         </section>
       </div>

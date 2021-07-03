@@ -1,5 +1,5 @@
 .RandomButton {
-  padding: 15px;
+  padding: 12px;
   width: 80%;
   border-radius: 10px;
   border-color: black;
@@ -7,4 +7,5 @@
   border-width: 1px;
   background-color: white;
   font-size: 1.2em;
+  font-weight: bold;
 }

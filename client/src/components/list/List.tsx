@@ -1,23 +1,27 @@
-import { Swatch } from "../../data/swatch";
+import { useEffect, useState } from "react";
+import { getFilterFn, SwatchModel } from "../../data/swatch";
+import Swatch from "../swatch/Swatch";
 
 interface ListProps {
   filter?: string;
-  swatches: Swatch[];
+  swatches: SwatchModel[];
 }
 
 export default function List(props: ListProps) {
-  return (
+  // const [swatches, setSwatches] = useState<SwatchModel[]>(props.swatches);
+  let swatches = props.swatches;
+
+  if (props.filter) {
+    const filterFn = getFilterFn(props.filter);
+    swatches = swatches.filter(s => filterFn(s));
+    console.log(swatches);
+    // setSwatches(res);
+  }
+
+  return(
     <>
-      <span>{props.filter}</span>
-      {
-      props.swatches.map(s => (
-        <div>
-          <span>{s.id}</span>
-          <span>{s.hue}</span>
-          <span>{s.saturation}</span>
-          <span>{s.value}</span>
-        </div>)
-      )}
+      <b>{ props.filter }</b>
+      {swatches.map(s => <Swatch model={s}></Swatch>)}
     </>
-  );
+  )
 }
